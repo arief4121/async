@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jquery</title>
+</head>
+<body style="margin: 15%;">
+    <div id="info"></div>
+    <div class="form">
+        <p>Nama :</p>
+          <input type="text" id="nama">
+        <p>Jenis Kelamin :</p>
+                <input type="radio" id="laki" name="gender" value="Laki laki">
+                <label for="laki">Laki Laki</label><br>
+                <input type="radio" id="perempuan" name="gender" value="Perempuan">
+                <label for="perempuan">Perempuan</label><br>
+        <p>Keterangan :</p>
+        <input type="text" id="ket">
+        <button id="submit">Submit</button>
+    </div>
+    <script src="jquery/jquery-3.6.0.min.js"></script>
+    <script>
+       $(document).ready(function(){
+         $("#submit").click(function(){
+                var nama = $('#nama').val();
+                var gender = $("[type='radio']:checked").val();
+                var ket = $('#ket').val();
+
+                let hasil = "Nama :"+ nama +" "+ "Jenis Kelamin :" + gender +" "+ "Keterangan :" + ket
+          $("#info").html("Loading.....")
+          $.post( "data.php", { data: hasil}).done(function( data ) {
+             $("#info").html(data)
+            });
+         })
+       })
+    </script>
+</body>
+</html>
